@@ -199,4 +199,51 @@ class TicketController extends Controller
 
         return substr(str_shuffle($pickString), 0, $lengthOfString);
     }
+
+    public function reportTicket()
+    {
+        $getDepartment = Department::where('is_active', 1)->get();
+        return view('admin.ticket_report', [
+            'title'     => 'Ticket Reports',
+            'department'=> $getDepartment,
+        ]);
+    }
+
+    public function getReportTicket(Request $request, $filter)
+    {
+        if($request->ajax()){
+            $ticket = new Ticket;
+
+            if($filter == 1){
+                $arr = [
+                    'month'         => date('Y-m'),
+                    'department'    => 0,
+                    'status'        => 0,
+                ];
+            }else{
+                $arr = [
+                    'month'         => $request->month,
+                    'department'    => $request->department_id,
+                    'status'        => $request->status,
+                ];
+            }
+            $data = $ticket->getFilterTickets($arr);
+
+            return DataTables::of($data)
+                               ->addColumn('submitted_date', function($row){
+                                    $submitted_date = '<span>' . date('d-m-Y', strtotime($row->created_at)) . '</span>';
+                                    return $submitted_date;
+                               })
+                               ->addColumn('status', function($row){
+                                    if($row->is_active == 1){
+                                        $status = '<span class="badge badge-warning">Pending</span>';
+                                    }else{
+                                        $status = '<span class="badge badge-primary">Done</span>';
+                                    }
+                                    return $status;
+                               })
+                               ->rawColumns(['submitted_date', 'status'])
+                               ->make(true);
+        }
+    }
 }

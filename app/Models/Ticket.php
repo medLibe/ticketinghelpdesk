@@ -49,4 +49,48 @@ class Ticket extends Model
 
         return $data;
     }
+
+    public function getFilterTickets($arr)
+    {
+        $month = $arr['month'];
+        if($arr['department'] == 0 && $arr['status'] == 0){
+            $data = DB::table('tickets')
+                    ->join('departments', 'tickets.department_id', '=', 'departments.id')
+                    ->join('helpdesks', 'tickets.helpdesk_id', '=', 'helpdesks.id')
+                    ->select('tickets.*', 'helpdesks.helpdesk_name', 'departments.department_name',
+                        DB::raw("(CASE tickets.priority WHEN 1 THEN 'High' WHEN 2 THEN 'Medium'  ELSE 'Low' END) AS priority"))
+                    ->whereRaw("DATE_FORMAT(tickets.created_at, '%Y-%m') = '$month'")
+                    ->get();
+        }elseif($arr['department'] == 0 && $arr['status'] != 0){
+            $data = DB::table('tickets')
+                    ->join('departments', 'tickets.department_id', '=', 'departments.id')
+                    ->join('helpdesks', 'tickets.helpdesk_id', '=', 'helpdesks.id')
+                    ->select('tickets.*', 'helpdesks.helpdesk_name', 'departments.department_name',
+                        DB::raw("(CASE tickets.priority WHEN 1 THEN 'High' WHEN 2 THEN 'Medium'  ELSE 'Low' END) AS priority"))
+                    ->whereRaw("DATE_FORMAT(tickets.created_at, '%Y-%m') = '$month'")
+                    ->where('tickets.is_active', $arr['status'])
+                    ->get();
+        }elseif($arr['department'] != 0 && $arr['status'] == 0){
+            $data = DB::table('tickets')
+                    ->join('departments', 'tickets.department_id', '=', 'departments.id')
+                    ->join('helpdesks', 'tickets.helpdesk_id', '=', 'helpdesks.id')
+                    ->select('tickets.*', 'helpdesks.helpdesk_name', 'departments.department_name',
+                        DB::raw("(CASE tickets.priority WHEN 1 THEN 'High' WHEN 2 THEN 'Medium'  ELSE 'Low' END) AS priority"))
+                    ->whereRaw("DATE_FORMAT(tickets.created_at, '%Y-%m') = '$month'")
+                    ->where('department_id', $arr['department'])
+                    ->get();
+        }else{
+            $data = DB::table('tickets')
+                    ->join('departments', 'tickets.department_id', '=', 'departments.id')
+                    ->join('helpdesks', 'tickets.helpdesk_id', '=', 'helpdesks.id')
+                    ->select('tickets.*', 'helpdesks.helpdesk_name', 'departments.department_name',
+                        DB::raw("(CASE tickets.priority WHEN 1 THEN 'High' WHEN 2 THEN 'Medium'  ELSE 'Low' END) AS priority"))
+                    ->whereRaw("DATE_FORMAT(tickets.created_at, '%Y-%m') = '$month'")
+                    ->where('tickets.is_active', $arr['status'])
+                    ->where('department_id', $arr['department'])
+                    ->get();
+        }
+
+        return $data;
+    }
 }

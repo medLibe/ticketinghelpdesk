@@ -40,8 +40,8 @@
             <div class="menu_section">
                 <h3>OTHER</h3>
                 <ul class="nav side-menu">
-                    <li><a href="javascript:void(0)"><i class="fa fa-file"></i> Reports </a></li>
-                    <li><a href="javascript:void(0)"><i class="fa fa-users"></i> Teams </a></li>
+                    <li><a href="/admin/ticket-report"><i class="fa fa-file"></i> Ticket Reports </a></li>
+                    <li><a href="/admin/team"><i class="fa fa-users"></i> Teams </a></li>
                 </ul>
             </div>
         </div>

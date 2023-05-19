@@ -79,7 +79,9 @@ Route::controller(TicketController::class)->group(function() {
 
     // Ticket - Admin
     Route::get('/admin/ticket', 'index')->name('admin.ticket')->middleware('auth');
+    Route::get('/admin/ticket-report', 'reportTicket')->name('admin.ticket-report')->middleware('auth');
     Route::get('/admin/ticket-ajax', 'getTicket')->name('admin.ticket-ajax')->middleware('auth');
+    Route::get('/admin/ticket-report-ajax/{id}', 'getReportTicket')->name('admin.ticket-report-ajax')->middleware('auth');
     Route::get('/admin/ticket-view/{id}', 'viewTicket')->name('admin.ticket-view')->middleware('auth');
     Route::post('/admin/ticket-approval/{id}', 'approvalTicket')->name('admin.ticket-approval')->middleware('auth');
 });
