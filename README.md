@@ -1,4 +1,4 @@
-<p style="font-size: 16pt; font-weight: bold;">Ticketing Helpdesk</p>
+<h1>Ticketing Helpdesk</h1>
 
 Ticketing Helpdesk is an Web based system that make other department easier to ask helpdesk from IT department.
 
@@ -10,6 +10,12 @@ How to use:
 5. Run 'php artisan migrate:fresh'.
 6. Congratulations the app run successfully, but first step you have to add at least 1 user in 'users' table, then you can login in -> localhost:8000
 7. If you access app as other department, you can access localhost:8000/helpdeskticket.
+
+Feature (v1.1):
+As admin you are able to:
+1. View report of ticket (default by current month).
+2. Filter report of ticket by month, department and status.
+3. Print, Export to excel, pdf, or csv of the report.
 
 Feature (v1.0):
 As Admin you are able to:
