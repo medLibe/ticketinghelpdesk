@@ -1,5 +1,5 @@
 <h1>Ticketing Helpdesk</h1>
-[helpdeskticket.png](https://postimg.cc/jCv3X7Bj)
+[![helpdeskticket.png](https://i.postimg.cc/m2GxT3w7/helpdeskticket.png)](https://postimg.cc/jCv3X7Bj)
 Ticketing Helpdesk is an Web based system that make other department easier to ask helpdesk from IT department.
 
 How to use:
