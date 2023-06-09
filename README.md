@@ -31,6 +31,4 @@ As User (other departments) you are able to:
 3. View detail of your ticket submitted.
 4. Re-check your ticket's progress base on your ticket number.
 
-<div>
-    <br>Please give star if you want to downlod or clone this repository</br>
-</div>
+ <strong>Please give star if you want to downlod or clone this repository</strong>
